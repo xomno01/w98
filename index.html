@@ -16,8 +16,10 @@
             align-items: center;
         }
         .computer {
-            width: 800px;
-            height: 600px;
+            width: 90vw; /* Linh hoạt theo chiều rộng màn hình */
+            max-width: 800px; /* Giới hạn tối đa cho PC */
+            height: 70vh; /* Linh hoạt theo chiều cao màn hình */
+            max-height: 600px; /* Giới hạn tối đa cho PC */
             background: #c0c0c0;
             border: 10px solid #808080;
             border-radius: 10px;
@@ -65,6 +67,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 80%; /* Linh hoạt theo màn hình */
+            max-width: 300px; /* Giới hạn kích thước logo */
         }
         .desktop {
             display: none;
@@ -78,15 +82,16 @@
             position: absolute;
             cursor: pointer;
             text-align: center;
+            width: 60px; /* Điều chỉnh kích thước icon */
         }
         .icon img {
-            width: 48px;
-            height: 48px;
+            width: 100%;
+            height: auto;
         }
         .icon span {
             color: #fff;
             text-shadow: 1px 1px #000;
-            font-size: 14px;
+            font-size: 12px; /* Giảm kích thước chữ cho mobile */
         }
         .taskbar {
             position: absolute;
@@ -116,6 +121,7 @@
             background: #c0c0c0;
             border: 2px outset #fff;
             padding: 10px;
+            width: 150px; /* Điều chỉnh cho mobile */
         }
         .start-menu button {
             display: block;
@@ -136,6 +142,9 @@
             background: #c0c0c0;
             border: 2px outset #fff;
             box-shadow: 2px 2px #000;
+            width: 80%; /* Linh hoạt cho mobile */
+            max-width: 400px; /* Giới hạn tối đa */
+            height: auto;
         }
         .window-title {
             background: #000080;
@@ -153,11 +162,56 @@
             cursor: pointer;
         }
         #chat-history {
-            height: 200px;
+            height: 150px; /* Giảm chiều cao cho mobile */
             overflow-y: auto;
             border: 1px solid #000;
             margin-bottom: 10px;
             padding: 5px;
+        }
+        /* Media query cho mobile */
+        @media (max-width: 600px) {
+            .computer {
+                width: 100vw;
+                height: 100vh;
+                border: none;
+                border-radius: 0;
+            }
+            .screen {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                padding: 10px;
+            }
+            .power-btn {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+            .icon {
+                width: 40px;
+            }
+            .icon span {
+                font-size: 10px;
+            }
+            .taskbar {
+                height: 25px;
+            }
+            .start-btn {
+                padding: 2px 5px;
+            }
+            .start-menu {
+                width: 120px;
+            }
+            .window {
+                width: 90%;
+                max-width: none;
+            }
+            #chat-history {
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -179,7 +233,7 @@ Detecting IDE Primary Slave  ... None
 Booting from Hard Disk...
 Starting Windows 98...
             </div>
-            <img class="logo" src="https://www.citypng.com/public/uploads/preview/microsoft-windows-98-black-logo-png-701751694708155kbdsfr7zib.png" alt="Windows 98 Logo" width="800">
+            <img class="logo" src="https://www.citypng.com/public/uploads/preview/microsoft-windows-98-black-logo-png-701751694708155kbdsfr7zib.png" alt="Windows 98 Logo">
             <div class="desktop">
                 <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('my-computer')">
                     <img src="https://i.pinimg.com/originals/c3/63/b9/c363b9a5de6eb710ff397d862442b804.png" alt="My Computer">
@@ -203,8 +257,8 @@ Starting Windows 98...
                     </div>
                 </div>
             </div>
-            <div class="window" id="my-computer-window" style="top: 100px; left: 100px; width: 300px; height: 200px;">
-                <div class="window-title" onmousedown="dragStart(event, 'my-computer-window')">
+            <div class="window" id="my-computer-window" style="top: 100px; left: 100px;">
+                <div class="window-title" onmousedown="dragStart(event, 'my-computer-window')" ontouchstart="dragStart(event, 'my-computer-window')">
                     <span>My Computer</span>
                     <button class="close-btn" onclick="closeWindow('my-computer')">X</button>
                 </div>
@@ -212,8 +266,8 @@ Starting Windows 98...
                     <p>Đây là mô phỏng My Computer.</p>
                 </div>
             </div>
-            <div class="window" id="notepad-window" style="top: 150px; left: 150px; width: 400px; height: 300px;">
-                <div class="window-title" onmousedown="dragStart(event, 'notepad-window')">
+            <div class="window" id="notepad-window" style="top: 150px; left: 150px;">
+                <div class="window-title" onmousedown="dragStart(event, 'notepad-window')" ontouchstart="dragStart(event, 'notepad-window')">
                     <span>Notepad</span>
                     <button class="close-btn" onclick="closeWindow('notepad')">X</button>
                 </div>
@@ -221,8 +275,8 @@ Starting Windows 98...
                     <textarea style="width: 100%; height: 90%;"></textarea>
                 </div>
             </div>
-            <div class="window" id="chat-window" style="top: 200px; left: 200px; width: 400px; height: 350px;">
-                <div class="window-title" onmousedown="dragStart(event, 'chat-window')">
+            <div class="window" id="chat-window" style="top: 200px; left: 200px;">
+                <div class="window-title" onmousedown="dragStart(event, 'chat-window')" ontouchstart="dragStart(event, 'chat-window')">
                     <span>Chat</span>
                     <button class="close-btn" onclick="closeWindow('chat')">X</button>
                 </div>
@@ -305,22 +359,28 @@ Starting Windows 98...
 
         function dragStart(event, id) {
             activeWindow = document.getElementById(id);
-            offsetX = event.clientX - activeWindow.offsetLeft;
-            offsetY = event.clientY - activeWindow.offsetTop;
+            const touch = event.touches ? event.touches[0] : event;
+            offsetX = touch.clientX - activeWindow.offsetLeft;
+            offsetY = touch.clientY - activeWindow.offsetTop;
             document.addEventListener('mousemove', dragMove);
+            document.addEventListener('touchmove', dragMove);
             document.addEventListener('mouseup', dragEnd);
+            document.addEventListener('touchend', dragEnd);
         }
 
         function dragMove(event) {
             if (activeWindow) {
-                activeWindow.style.left = (event.clientX - offsetX) + 'px';
-                activeWindow.style.top = (event.clientY - offsetY) + 'px';
+                const touch = event.touches ? event.touches[0] : event;
+                activeWindow.style.left = (touch.clientX - offsetX) + 'px';
+                activeWindow.style.top = (touch.clientY - offsetY) + 'px';
             }
         }
 
         function dragEnd() {
             document.removeEventListener('mousemove', dragMove);
+            document.removeEventListener('touchmove', dragMove);
             document.removeEventListener('mouseup', dragEnd);
+            document.removeEventListener('touchend', dragEnd);
         }
 
         // Chat functionality
